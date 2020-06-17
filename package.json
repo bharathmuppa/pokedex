@@ -1,0 +1,31 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Pokedox implementation",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:backend":"cd backend && npm ci && npm start",
+    "start:frontend":"cd frontend && npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bharathmuppa/pokedex.git"
+  },
+  "keywords": [
+    "vue",
+    "material",
+    "design",
+    "appolo",
+    "graphql"
+  ],
+  "author": "bharathmuppa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bharathmuppa/pokedex/issues"
+  },
+  "homepage": "https://github.com/bharathmuppa/pokedex#readme"
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="pokemon-list">
-    <div v-for="pokemon in allPokemons" :key="pokemon.id" >
+    <div v-for="pokemon in favPokemons" :key="pokemon.id" >
       <PokemonCard :pokemonDetails="pokemon" :display="'list'"></PokemonCard>
     </div>
   </div>
@@ -20,10 +20,10 @@ import PokemonCard from "../components/PokemonCard";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "home",
+  name: "Favorites",
   components: {
     PokemonCard,
   },
-  computed: mapGetters(["allPokemons"]),
+  computed: mapGetters(["favPokemons"]),
 };
 </script>

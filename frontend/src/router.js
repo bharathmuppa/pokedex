@@ -11,16 +11,23 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      // Added bacause of issue with vue material router configurations https://github.com/vuematerial/vue-material/issues/2069
+      alias: "/tabs/*",
+      component: Home,
     },
     {
-      path: "/about",
-      name: "about",
+      path: "/pokemon/:name",
+      name: "pokemon",
+      component: () => import("./views/Details.vue"),
+    },
+    {
+      path: "/favorites",
+      name: "favorites",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    }
-  ]
+        import(/* webpackChunkName: "about" */ "./views/Favorites.vue"),
+    },
+  ],
 });
