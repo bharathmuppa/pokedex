@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:backend":"cd backend && npm ci && npm start",
+    "start:backend":"cd backend  && npm start",
     "start:frontend":"cd frontend && npm run serve"
   },
   "repository": {

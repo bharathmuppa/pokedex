@@ -28,8 +28,10 @@
     </md-toolbar>
 
     <div>
-      <Filters></Filters>
-      <router-view />
+      <Filters v-show="showFilter"></Filters>
+      <transition>
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -42,6 +44,19 @@ export default {
   components: { Filters },
   data: () => ({
     menuVisible: false,
+    showFilter: true,
   }),
+  watch: {
+    $route: function() {
+      // Check if given route is true, if it is then hide Nav.
+      // eslint-disable-next-line no-console
+      console.log(this.$route);
+      if (this.$route.name === "pokemon") {
+        this.showFilter = false;
+      } else {
+        this.showFilter = true;
+      }
+    },
+  },
 };
 </script>

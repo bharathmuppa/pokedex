@@ -1,0 +1,5 @@
+mutation favoritePokemon{
+  favoritePokemon(id: "001"){
+    name
+  }
+}

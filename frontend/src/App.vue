@@ -6,11 +6,16 @@
 
 <script>
 import Header from "./components/Header";
-
+import { mapActions } from "vuex";
 export default {
   name: "app",
   components: {
     Header,
+  },
+  methods: { ...mapActions(["fetchAllPokemons","fetchAllPokemonTypes"]) },
+  created() {
+    this.fetchAllPokemons();
+    this.fetchAllPokemonTypes();
   },
 };
 </script>
@@ -38,7 +43,9 @@ body::-webkit-scrollbar {
   width: 2px;
   border-radius: 12px;
 }
-
+.isfavorite {
+  color: red !important;
+}
 body::-webkit-scrollbar-track {
   box-shadow: inset 0 0 2px #25ddf5;
 }

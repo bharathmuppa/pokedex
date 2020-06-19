@@ -1,0 +1,21 @@
+query pokemonByName
+{
+  pokemonByName(name: "${name}"){
+    name,
+    evolutions{
+    name
+  },
+    weight{
+      maximum,
+      minimum
+    },
+    height{
+      maximum,
+      minimum
+    },
+    maxCP,
+    maxHP,
+    sound,
+    isFavorite
+  }
+}

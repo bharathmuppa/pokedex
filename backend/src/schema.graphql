@@ -61,12 +61,14 @@ type PokemonEvolutionRequirement {
 
 type Query {
     pokemons(query: PokemonsQueryInput!): PokemonConnection!
+    allpokemons: [Pokemon]
     pokemonByName(name: String!): Pokemon
     pokemonById(id: ID!): Pokemon
     pokemonTypes: [String!]!
 }
 
 type Mutation {
+    toggleFavoritePokemon(id: ID!): Pokemon
     favoritePokemon(id: ID!): Pokemon
     unFavoritePokemon(id: ID!): Pokemon
 }

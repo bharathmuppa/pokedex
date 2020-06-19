@@ -47,10 +47,20 @@ const resolvers = {
       }
     },
     pokemonById: (_, args) => pokemonsData.find(pokemon => pokemon.id === args.id),
+    allpokemons: (_) => pokemonsData,
     pokemonByName: (_, args ) => pokemonsData.find(pokemon => pokemon.name.toLowerCase() === args.name.toLowerCase()),
     pokemonTypes: () => _.uniq(_.flatMap(pokemonsData, pokemon => pokemon.types))
   },
   Mutation: {
+
+    toggleFavoritePokemon: (_, args) => {
+      const pokemon = pokemonsData.find(pokemon => pokemon.id === args.id);
+      if (!pokemon) throw Error("Pokemon not found");
+      let prevVal =favorites.get(args.id) ;
+      prevVal = prevVal || false;
+      favorites.set(args.id, !prevVal);
+      return pokemon;
+    },
     favoritePokemon: (_, args) => {
       const pokemon = pokemonsData.find(pokemon => pokemon.id === args.id);
       if (!pokemon) throw Error("Pokemon not found");
