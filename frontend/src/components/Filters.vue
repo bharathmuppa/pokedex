@@ -5,7 +5,7 @@
       <md-input v-model="selectedPokedex"></md-input>
     </md-field>
     <md-field class="pokedex--items">
-      <label for="pokedexTypes">Movies</label>
+      <label for="pokedexTypes">Type</label>
       <md-select
         v-model="selectedType"
         name="pokedexTypes"
@@ -22,8 +22,12 @@
       </md-select>
     </md-field>
     <span class="fxFlex"></span>
-    <md-icon class="view--module">view_module</md-icon>
-    <md-icon class="view--list">list</md-icon>
+    <md-button class="view--module md-icon-button md-dense md-primary">
+      <md-icon >view_module</md-icon>
+    </md-button>
+    <md-button class="md-icon-button md-dense md-primary">
+      <md-icon>list</md-icon>
+    </md-button>
   </md-toolbar>
 </template>
 
@@ -43,11 +47,7 @@
 .fxFlex {
   flex-grow: 2;
 }
-.view--list,
-.view--module {
-  margin-left: 1rem;
-  font-size: 32px !important;
-}
+
 </style>
 <script>
 import { mapActions, mapState } from "vuex";

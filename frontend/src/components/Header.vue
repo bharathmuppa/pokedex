@@ -3,6 +3,8 @@
     <md-toolbar class="md-medium md-primary">
       <div class="md-toolbar-row">
         <div class="md-toolbar-section-start">
+          <img src="../assets/pokeball.svg" class="brand-icon" />
+
           <span class="md-title">Pokedex</span>
         </div>
 
@@ -26,37 +28,19 @@
         </div>
       </div>
     </md-toolbar>
-
-    <div>
-      <Filters v-show="showFilter"></Filters>
-      <transition>
-        <router-view></router-view>
-      </transition>
-    </div>
   </div>
 </template>
-
+<style scoped>
+.brand-icon {
+  width: 32px;
+}
+</style>
 <script>
-import Filters from "./Filters.vue";
-
 export default {
   name: "Header",
-  components: { Filters },
+
   data: () => ({
     menuVisible: false,
-    showFilter: true,
   }),
-  watch: {
-    $route: function() {
-      // Check if given route is true, if it is then hide Nav.
-      // eslint-disable-next-line no-console
-      console.log(this.$route);
-      if (this.$route.name === "pokemon") {
-        this.showFilter = false;
-      } else {
-        this.showFilter = true;
-      }
-    },
-  },
 };
 </script>

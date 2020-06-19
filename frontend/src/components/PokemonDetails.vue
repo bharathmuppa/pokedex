@@ -86,7 +86,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .pokemon-details {
   display: flex;
   width: 100%;

@@ -1,21 +1,43 @@
 <template>
   <div id="app">
     <Header></Header>
+    <div>
+      <Filters v-show="showFilter"></Filters>
+      <transition>
+        <router-view></router-view>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
+import Filters from "./components/Filters";
 import { mapActions } from "vuex";
 export default {
   name: "app",
   components: {
-    Header,
+    Header, Filters
   },
+   data: () => ({
+    showFilter: true,
+  }),
   methods: { ...mapActions(["fetchAllPokemons","fetchAllPokemonTypes"]) },
   created() {
     this.fetchAllPokemons();
     this.fetchAllPokemonTypes();
+  },
+   watch: {
+    $route: function() {
+      // Check if given route is true, if it is then hide Nav.
+      // eslint-disable-next-line no-console
+      console.log(this.$route);
+      if (this.$route.name === "pokemon") {
+        this.showFilter = false;
+      } else {
+        this.showFilter = true;
+      }
+    },
   },
 };
 </script>

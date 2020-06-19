@@ -13,7 +13,7 @@ export default new Router({
       name: "home",
       // Added bacause of issue with vue material router configurations https://github.com/vuematerial/vue-material/issues/2069
       alias: "/tabs/*",
-      component: Home,
+      component: Home
     },
     {
       path: "/pokemon/:id",
@@ -23,11 +23,8 @@ export default new Router({
     {
       path: "/favorites",
       name: "favorites",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/Favorites.vue"),
-    },
-  ],
+        import(/* webpackChunkName: "about" */ "./views/Favorites.vue")
+    }
+  ]
 });
