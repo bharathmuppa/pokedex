@@ -35,20 +35,25 @@
         </md-button>
       </div>
       <span class="md-caption">{{ pokemon.types.join(", ") }}</span>
-      <div class="progress-bar">
-        <span></span>
+      <div class="progress-bar-container">
         <md-progress-bar
           md-mode="determinate"
+          class="progress-bar-container--bar"
           :md-value="calcMaxCP"
         ></md-progress-bar>
+        <span class="progress-bar-container--sub-title"
+          >CP: {{ pokemon.maxCP }}</span
+        >
       </div>
-      <div class="progress-bar">
-        <span></span>
+      <div class="progress-bar-container">
         <md-progress-bar
-          class="md-accent"
+          class="md-accent progress-bar-container--bar"
           md-mode="determinate"
           :md-value="calcMaxHP"
         ></md-progress-bar>
+        <span class="progress-bar-container--sub-title"
+          >HP: {{ pokemon.maxHP }}</span
+        >
       </div>
     </md-content>
 
@@ -149,9 +154,21 @@
 .pokemon-details-section-3 > div > span {
   margin: 4px;
 }
-.progress-bar {
+.progress-bar-container {
   width: 100%;
   margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.progress-bar-container .progress-bar-container--bar{
+   width: 85%;
+}
+.progress-bar-container--sub-title{
+  font-size: 16px;
+    font-weight: bolder;
+   width: 10%;
 }
 .pokemon-details-section-2,
 .pokemon-details-section-3 {
