@@ -2,7 +2,7 @@
   <div>
     <md-card>
       <md-card-area md-inset class="card--area">
-        <md-card-media class="card--media" v-on:click.native="openDialog">
+        <md-card-media class="card--media" v-on:click.native="openDetails">
           <img
             :src="pokemonDetails.image"
             :alt="pokemonDetails.name"
@@ -90,24 +90,37 @@
 }
 </style>
 <script>
+/**
+ * This component represent Functionality and UI for Card view of Pokemon
+ * @PokemonCard
+ * @props
+ * @pokemonDetails {Object} details of the pokemon
+ */
 import { mapActions } from "vuex";
 
 export default {
   name: "PokemonCard",
-  props: ["pokemonDetails", "displayMode"],
+  props: ["pokemonDetails"],
   methods: {
+    /**
+     * Functionality  to toggle isFavorite property of pokemon
+     * @toggleFavorite
+     */
     toggleFavourite: function() {
       this.pokemonDetails.isFavorite = !this.pokemonDetails.isFavorite;
       this.toggleFavPokemon(this.pokemonDetails);
     },
-    openDialog: function() {
-      // eslint-disable-next-line no-console
+    /**
+     * Functionality to navigate to Deatils page of the Pokemon
+     * @openDetails
+     */
+    openDetails: function() {
       this.$router.push({
         name: "pokemon",
-        params: { id: this.pokemonDetails.id },
+        params: { id: this.pokemonDetails.id }
       });
     },
-    ...mapActions(["toggleFavPokemon"]),
-  },
+    ...mapActions(["toggleFavPokemon"])
+  }
 };
 </script>

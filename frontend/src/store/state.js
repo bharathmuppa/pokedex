@@ -3,5 +3,6 @@ export const state = {
   pokemonTypes: [],
   searchPokedexText: "",
   searchPokedexTypes: [],
-  currentPokemon: null,
+  displayMode: "grid",
+  currentPokemon: null
 };

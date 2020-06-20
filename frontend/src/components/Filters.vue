@@ -1,15 +1,15 @@
 <template>
-  <md-toolbar class=" md-medium md-toolbar-form" md-elevation="2">
-    <md-field class="search">
+  <md-toolbar class="md-medium md-toolbar-form" md-elevation="2">
+    <md-field class="pokemon-name">
       <label>Search Pokedex</label>
-      <md-input v-model="selectedPokedex"></md-input>
+      <md-input v-model="pokemonName"></md-input>
     </md-field>
-    <md-field class="pokedex--items">
-      <label for="pokedexTypes">Type</label>
+    <md-field class="pokemon-types">
+      <label for="pokemonCategoryTypes">Type</label>
       <md-select
-        v-model="selectedType"
-        name="pokedexTypes"
-        id="pokedexTypes"
+        v-model="pokemonType"
+        name="pokemonCategoryTypes"
+        id="pokemonCategoryTypes"
         multiple
         md-dense
       >
@@ -22,10 +22,18 @@
       </md-select>
     </md-field>
     <span class="fxFlex"></span>
-    <md-button class="view--module md-icon-button md-dense md-primary">
-      <md-icon >view_module</md-icon>
+    <md-button
+      class="view--module md-icon-button md-dense "
+      :class="[isItAGrid ? 'md-primary' : '']"
+      @click="changeDisplayMode('grid')"
+    >
+      <md-icon>view_module</md-icon>
     </md-button>
-    <md-button class="md-icon-button md-dense md-primary">
+    <md-button
+      class="md-icon-button md-dense"
+      :class="[isItAList ? 'md-primary' : '']"
+      @click="changeDisplayMode('list')"
+    >
       <md-icon>list</md-icon>
     </md-button>
   </md-toolbar>
@@ -37,42 +45,94 @@
   flex-direction: row;
   justify-content: flex-start;
 }
-.md-toolbar-form .search {
+.md-toolbar-form .pokemon-name {
   width: 50%;
   margin-right: 1rem;
 }
-.md-toolbar-form .pokedex--items {
+.md-toolbar-form .pokemon-types {
   width: 15%;
 }
 .fxFlex {
   flex-grow: 2;
 }
-
 </style>
 <script>
+/**
+ * This component is responsible for handling poke name and type search
+ * @Filters
+ */
 import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Filters",
+  /**
+   * @pokemanName stores model value for name field
+   * @pokemonTypes store model value for type field
+   */
   data: () => ({
-    selectedPokedex: "",
-    selectedType: [],
+    pokemonName: "",
+    pokemonType: []
   }),
   watch: {
-    selectedPokedex: function(val) {
-      // eslint-disable-next-line no-console
+    /**
+     * Watches for pokemon field name changes and triggers the store action
+     */
+    pokemonName: function(val) {
+      // TODO: Add throttle time to make search more predictable and stable(Increases performance)
       this.filterPokemonWithName(val);
     },
-    selectedType: function(val) {
-      // eslint-disable-next-line no-console
+    /**
+     * Watches for pokemon types field changes
+     */
+    pokemonType: function(val) {
       this.filterPokemonWithTypes(val);
     },
+    /**
+     * Watch the route on every change and reset the filters
+     */
+    $route: function() {
+      this.resetData();
+      this.filterPokemonWithName("");
+      this.filterPokemonWithTypes([]);
+    }
   },
   computed: {
-    ...mapState(["pokemonTypes"]),
+    /**
+     * PokemonTypes is collection of all types of pokemons,
+     * displayMode is state representation of view preference
+     */
+    ...mapState(["pokemonTypes", "displayMode"]),
+    isItAGrid() {
+      return this.displayMode === "grid";
+    },
+    isItAList() {
+      return this.displayMode === "list";
+    }
   },
   methods: {
-    ...mapActions(["filterPokemonWithTypes", "filterPokemonWithName"]),
-  },
+    ...mapActions([
+      "filterPokemonWithTypes",
+      "filterPokemonWithName",
+      "changePokemonDisplayMode"
+    ]),
+    /**
+     * This function helps in choosing view modes
+     * @changeDisplayMode
+     * @params
+     * @displayMode {string}
+     */
+    changeDisplayMode: function(displayMode) {
+      // Change this displayModes propety to be constant
+      this.changePokemonDisplayMode(displayMode);
+    },
+    /**
+     * reset the data state of components
+     * @resetData
+     */
+    resetData: function() {
+      this.pokemonName = "";
+      this.pokemonType = [];
+    }
+  }
 };
 </script>

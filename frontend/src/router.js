@@ -18,7 +18,7 @@ export default new Router({
     {
       path: "/pokemon/:id",
       name: "pokemon",
-      component: () => import("./views/Details.vue"),
+      component: () => import("./views/Details.vue")
     },
     {
       path: "/favorites",

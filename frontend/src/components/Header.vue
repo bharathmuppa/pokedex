@@ -4,7 +4,6 @@
       <div class="md-toolbar-row">
         <div class="md-toolbar-section-start">
           <img src="../assets/pokeball.svg" class="brand-icon" />
-
           <span class="md-title">Pokedex</span>
         </div>
 
@@ -36,11 +35,12 @@
 }
 </style>
 <script>
+/**
+ * This component holds the functionality of header,
+ * which consists of Title Toolbar and navigation panel
+ * @Header
+ */
 export default {
-  name: "Header",
-
-  data: () => ({
-    menuVisible: false,
-  }),
+  name: "Header"
 };
 </script>

@@ -10,39 +10,7 @@
   </div>
 </template>
 
-<script>
-import Header from "./components/Header";
-import Filters from "./components/Filters";
-import { mapActions } from "vuex";
-export default {
-  name: "app",
-  components: {
-    Header, Filters
-  },
-   data: () => ({
-    showFilter: true,
-  }),
-  methods: { ...mapActions(["fetchAllPokemons","fetchAllPokemonTypes"]) },
-  created() {
-    this.fetchAllPokemons();
-    this.fetchAllPokemonTypes();
-  },
-   watch: {
-    $route: function() {
-      // Check if given route is true, if it is then hide Nav.
-      // eslint-disable-next-line no-console
-      console.log(this.$route);
-      if (this.$route.name === "pokemon") {
-        this.showFilter = false;
-      } else {
-        this.showFilter = true;
-      }
-    },
-  },
-};
-</script>
-
-<style lang="scss">
+<style lang="css">
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -78,3 +46,36 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid red;
 }
 </style>
+
+<script>
+import Header from "./components/Header";
+import Filters from "./components/Filters";
+import { mapActions } from "vuex";
+export default {
+  name: "app",
+  components: {
+    Header,
+    Filters
+  },
+  data: () => ({
+    showFilter: true
+  }),
+  methods: { ...mapActions(["fetchAllPokemons", "fetchAllPokemonTypes"]) },
+  created() {
+    this.fetchAllPokemons();
+    this.fetchAllPokemonTypes();
+  },
+  watch: {
+    /**
+     * Hide header in deatils page of Pokemon and show in other case
+     */
+    $route: function() {
+      if (this.$route.name === "pokemon") {
+        this.showFilter = false;
+      } else {
+        this.showFilter = true;
+      }
+    }
+  }
+};
+</script>
